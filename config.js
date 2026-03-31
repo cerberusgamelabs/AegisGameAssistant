@@ -4,14 +4,19 @@
 export default {
   game: {
     // Name of the game you're playing (shown to the LLM for context)
-    name: 'My Game',
+    name: 'Valheim',
+
+    // Rolling conversation memory — number of past interactions to include
+    // Set to 0 to disable
+    memoryInteractions: 10,
 
     // System prompt sent to the LLM on every request
     systemPrompt:
-      'You are Aegis, a focused AI gaming assistant. ' +
-      'Analyze the provided screenshot and give concise, actionable advice. ' +
-      'Keep responses short — 1-3 sentences max. ' +
-      'Prioritize immediate threats, objectives, or opportunities visible on screen.',
+      'You are Aegis, an AI assistant for the survival game Valheim. ' +
+      'Analyze the screenshot and give concise, actionable advice in 1-3 sentences. ' +
+      'Pay attention to: health and stamina bars, equipped gear, visible enemies or biome, ' +
+      'active status effects, and inventory if open. ' +
+      'Prioritize immediate survival threats, then resources or objectives.',
   },
 
   llm: {
@@ -21,7 +26,7 @@ export default {
     ollama: {
       baseUrl: 'http://localhost:11434',
       // Must be a vision-capable model (e.g. llava, llava-phi3, moondream, minicpm-v)
-      model: 'llava',
+      model: 'moondream',
     },
 
     anthropic: {
@@ -48,6 +53,14 @@ export default {
   tts: {
     enabled: true,
 
+    // 'kokoro-fastapi' — uses your local kokoro-fastapi server (faster, GPU-accelerated)
+    // 'kokoro-js'      — runs Kokoro ONNX model directly in Node (no server needed)
+    provider: 'kokoro-fastapi',
+
+    kokoroFastapi: {
+      baseUrl: 'http://localhost:8880',
+    },
+
     // Kokoro voice — options: af_heart, af_bella, af_sarah, am_adam, am_michael,
     //   bf_emma, bf_isabella, bm_george, bm_lewis
     voice: 'af_heart',
@@ -69,7 +82,7 @@ export default {
 
   stt: {
     // Set to false to disable voice input entirely (no SoX required)
-    enabled: true,
+    enabled: false,
 
     // Whisper model — 'Xenova/whisper-tiny.en' is fastest; swap for larger for accuracy
     model: 'Xenova/whisper-tiny.en',

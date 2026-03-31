@@ -10,6 +10,7 @@ export class Assistant {
     this.paused = false;
     this.busy = false;          // prevents overlapping LLM calls
     this._intervalId = null;
+    this._history = [];         // rolling conversation memory
   }
 
   async start() {
@@ -100,8 +101,21 @@ export class Assistant {
       const base64Image = await captureScreen();
       console.log(`[Aegis] Querying ${config.llm.provider} (${mode})...`);
 
-      const response = await queryLLM(base64Image, userQuery);
+      const response = await queryLLM(base64Image, userQuery, this._history);
       console.log(`[Aegis] Response: ${response}`);
+
+      // Update rolling history
+      const maxInteractions = config.game.memoryInteractions ?? 10;
+      if (maxInteractions > 0) {
+        const gameContext = `Game: ${config.game.name}`;
+        const userText = userQuery
+          ? `${gameContext}\n\nUser question: ${userQuery}`
+          : `${gameContext}\n\nAnalyze this screenshot and provide concise gaming advice.`;
+        this._history.push({ userText, assistantText: response });
+        if (this._history.length > maxInteractions) {
+          this._history.shift();
+        }
+      }
 
       await speak(response, { interrupt });
     } catch (err) {
