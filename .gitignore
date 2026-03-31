@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Kokoro / Whisper model caches
+.cache/
+models/
+
+# Temp audio files
+*.wav
+*.mp3
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Logs
+logs/
+*.log
+npm-debug.log*

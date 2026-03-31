@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"import\\(''kokoro-js''\\).then\\(m => console.log\\(''kokoro-js OK''\\)\\).catch\\(e => console.log\\(''kokoro-js MISSING:'', e.code\\)\\)\")",
+      "Bash(node -e \"import\\(''screenshot-desktop''\\).then\\(m => console.log\\(''screenshot-desktop OK''\\)\\).catch\\(e => console.log\\(''screenshot-desktop MISSING:'', e.code\\)\\)\")",
+      "Bash(node -e \"import\\(''node-global-key-listener''\\).then\\(m => console.log\\(''node-global-key-listener OK''\\)\\).catch\\(e => console.log\\(''MISSING:'', e.code\\)\\)\")",
+      "Bash(node -e \"import\\(''ollama''\\).then\\(m => console.log\\(''ollama OK''\\)\\).catch\\(e => console.log\\(''MISSING:'', e.code\\)\\)\")",
+      "Bash(node -e \"import\\(''@anthropic-ai/sdk''\\).then\\(m => console.log\\(''anthropic OK''\\)\\).catch\\(e => console.log\\(''MISSING:'', e.code\\)\\)\")",
+      "Bash(node -e \"import\\(''@huggingface/transformers''\\).then\\(m => console.log\\(''transformers OK''\\)\\).catch\\(e => console.log\\(''MISSING:'', e.code\\)\\)\")"
+    ]
+  }
+}

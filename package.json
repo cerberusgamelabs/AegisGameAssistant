@@ -1,0 +1,26 @@
+{
+  "name": "aegis-game-assistant",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI gaming assistant with screen capture, local/cloud LLM, and Kokoro TTS",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@huggingface/transformers": "^3.4.0",
+    "dotenv": "^16.4.0",
+    "kokoro-js": "^1.2.0",
+    "node-global-key-listener": "^0.3.0",
+    "node-record-lpcm16": "^1.0.1",
+    "ollama": "^0.5.12",
+    "openai": "^4.85.0",
+    "play-sound": "^1.1.6",
+    "screenshot-desktop": "^1.15.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
